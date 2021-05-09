@@ -36,7 +36,7 @@ def process_log_file(cur, filepath):
     time_data.extend((df['ts'],
                       t.dt.hour,
                       t.dt.day,
-                      t.dt.weekofyear,
+                      t.dt.isocalendar().week,
                       t.dt.month,
                       t.dt.year,
                       t.dt.weekday))
@@ -110,7 +110,7 @@ def process_data(cur, conn, filepath, func):
 
 
 def main():
-    conn = psycopg2.connect("host=127.0.0.1 dbname=sparkifydb user=student password=student")
+    conn = psycopg2.connect("host=127.0.0.1 dbname=sparkifydb user=guillaume password=test")
     cur = conn.cursor()
 
     process_data(cur, conn, filepath='data/song_data', func=process_song_file)

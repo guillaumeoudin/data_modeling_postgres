@@ -77,7 +77,7 @@ user_table_insert = ("""
 INSERT INTO users (user_id, first_name, last_name, gender, level)
 VALUES (%s, %s, %s, %s, %s)
 ON CONFLICT (user_id)
-DO NOTHING
+DO UPDATE SET level=EXCLUDED.level
 """)
 
 song_table_insert = ("""
@@ -103,9 +103,13 @@ VALUES (%s, %s, %s, %s, %s, %s, %s)
 # FIND SONGS
 
 song_select = ("""
-SELECT song_id, songs.artist_id
-FROM songs JOIN artists ON songs.artist_id = artists.artist_id
-WHERE songs.title LIKE %s AND artists.artist_name LIKE %s AND songs.duration = %s
+SELECT songs.song_id, artists.artist_id
+FROM songs
+JOIN artists
+ON songs.artist_id = artists.artist_id
+WHERE songs.title = %s
+AND artists.artist_name = %s
+AND songs.duration = %s
 """)
 
 # QUERY LISTS
