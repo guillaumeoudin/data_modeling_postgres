@@ -29,18 +29,55 @@ And **4 dimensions tables**:
 
 This schema design is used to allow for easy query
 
-###### This is an <h6> tag
-test
+# Example queries
 
-State and justify your database schema design and ETL pipeline.
-[Optional] Provide example queries and results for song play analysis.
-
-what songs users are listening to
 ```
-"""
 SELECT song_id
 FROM songplays
 JOIN  songs ON songplays.artist_id = songs.artist_id
 ORDER BY
 
+```
+
+# (Optional) Run Postgres in Docker
+
+Instructions below to run locally Postgres with Docker.
+
+## First step : build Dockerfile
+
+Create a file named 'Dockerfile' with the following content
+
+```
+FROM library/postgres
+ENV POSTGRES_USER student
+ENV POSTGRES_PASSWORD student
+ENV POSTGRES_DB studentdb
+```
+
+Then run this command in order to build from the newly created **Dockerfile** (make sure not to forget the **.** at the end of this command)
+```
+docker build -t postgres-localdb-image .
+```
+
+## Alternative step : retrieve image from docker hub
+
+Execute to login then pull the image from docker hub
+```
+docker login docker.io
+```
+```
+docker pull guillaumeoudin/postgres-localdb-image
+```
+
+## Final step : run the container from the build image
+```
+docker run -d --name postgres-localdb-container -p 5432:5432 postgres-localdb-image
+```
+
+## Cleaning step
+Running the following will, in order, stop the container, remove the container, then remove the image.
+```
+docker stop postgres-localdb-container
+docker rm postgres-localdb-container
+docker rmi postgres-localdb-image
 ```

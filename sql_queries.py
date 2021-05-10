@@ -10,57 +10,57 @@ time_table_drop = "DROP TABLE IF EXISTS time"
 
 songplay_table_create = ("""
 CREATE TABLE IF NOT EXISTS songplays (
-                                songplay_id varchar PRIMARY KEY, 
-                                start_time bigint, 
-                                user_id int, 
-                                level varchar, 
-                                song_id varchar, 
-                                artist_id varchar, 
-                                session_id varchar, 
-                                location varchar, 
-                                user_agent varchar
+                                songplay_id VARCHAR PRIMARY KEY, 
+                                start_time BIGINT, 
+                                user_id INT, 
+                                level VARCHAR, 
+                                song_id VARCHAR, 
+                                artist_id VARCHAR, 
+                                session_id VARCHAR, 
+                                location VARCHAR, 
+                                user_agent VARCHAR
                                     )
 """)
 
 user_table_create = ("""
 CREATE TABLE IF NOT EXISTS users (
-                                user_id int PRIMARY KEY, 
-                                first_name varchar, 
-                                last_name varchar, 
-                                gender varchar, 
-                                level varchar
+                                user_id INT PRIMARY KEY, 
+                                first_name VARCHAR, 
+                                last_name VARCHAR, 
+                                gender VARCHAR, 
+                                level VARCHAR
 )
 """)
 
 song_table_create = ("""
 CREATE TABLE IF NOT EXISTS songs (
-                                song_id varchar PRIMARY KEY, 
-                                title varchar, 
-                                artist_id varchar, 
-                                year int, 
-                                duration numeric
+                                song_id VARCHAR PRIMARY KEY, 
+                                title VARCHAR, 
+                                artist_id VARCHAR, 
+                                year INT, 
+                                duration NUMERIC
 )
 """)
 
 artist_table_create = ("""
 CREATE TABLE IF NOT EXISTS artists (
-                                artist_id varchar PRIMARY KEY, 
-                                artist_name varchar, 
-                                artist_location varchar, 
-                                artist_latitude numeric, 
-                                artist_longitude numeric
+                                artist_id VARCHAR PRIMARY KEY, 
+                                artist_name VARCHAR, 
+                                artist_location VARCHAR, 
+                                artist_latitude NUMERIC, 
+                                artist_longitude NUMERIC
 )
 """)
 
 time_table_create = ("""
 CREATE TABLE IF NOT EXISTS time (
-                                start_time bigint, 
-                                hour int, 
-                                day int, 
-                                week int, 
-                                month int, 
-                                year int, 
-                                weekday int
+                                start_time BIGINT, 
+                                hour INT, 
+                                day INT, 
+                                week INT, 
+                                month INT, 
+                                year INT, 
+                                weekday INT
 )
 """)
 
