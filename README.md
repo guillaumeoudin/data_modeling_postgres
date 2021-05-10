@@ -9,12 +9,81 @@ Its main goals are :
 
 # Sparkify Database Project
 
-This project creates a postgres database `sparkifydb` for a fictional music app, *Sparkify*. The purpose of the database is to model song and log datasets (originaly stored in JSON format) with a star schema optimised for queries on song play analysis.
+This project creates a postgres database `sparkifydb` for a fictional music app, *Sparkify*. The purpose of the project is to create an ETL pipeline which loads song and user data from json files to the database, enabling us to run analytics queries on the data
+
+# Quick Start
+
+
+We will need to run a local postgres DB. The easiest way to achieve that is with Docker. You will first need to [install Docker from their website](https://www.docker.com) then either build the image with the provided Dockerfile or pull [ my image from Docker Hub](https://hub.docker.com/r/guillaumeoudin/postgres-localdb-image).
+
+### Option #1 : Building from Dockerfile
+
+Create the Dockerfile or use the one provided
+```docker
+FROM library/postgres
+ENV POSTGRES_USER student
+ENV POSTGRES_PASSWORD student
+ENV POSTGRES_DB studentdb
+```
+Then build
+```
+docker build -t postgres-localdb-image .
+```
+
+### Option #2 : Building from Dockerfile
+
+Run the following 
+```bash
+$ git clone https://github.com/guillaumeoudin/data_modeling_postgres
+$ cd data_modeling_postgres
+$ python3 create_tables.py
+$ python3 etl.py
+```
+
+
 
 ## The Data
 Currently the data consists of:
-- a directory of JSON logs on user activity on the app
-- a directory of JSON metadata on the songs played in the app
+- A directory of JSON logs on user activity on the app. Below is how the data is formatted in a json log file :
+```json
+{
+    "artist":"Des'ree",
+    "auth":"Logged In",
+    "firstName":"Kaylee",
+    "gender":"F",
+    "itemInSession":1,
+    "lastName":"Summers",
+    "length":246.30812,
+    "level":"free",
+    "location":"Phoenix-Mesa-Scottsdale, AZ",
+    "method":"PUT",
+    "page":"NextSong",
+    "registration":1540344794796.0,
+    "sessionId":139,
+    "song":"You Gotta Be",
+    "status":200,
+    "ts":1541106106796,
+    "userAgent":"\"Mozilla\/5.0 (Windows NT 6.1; WOW64
+    AppleWebKit\/537.36 (KHTML, like Gecko) Chrome\/35.0
+    1916.153 Safari\/537.36\"",
+    "userId":"8"
+}
+```
+- a directory of JSON metadata on the songs played in the app. Below is how the data is formatted in a json song file :
+```json
+{
+    "num_songs": 1,
+    "artist_id": "ARD7TVE1187B99BFB1",
+    "artist_latitude": null,
+    "artist_longitude": null,
+    "artist_location": "California - LA",
+    "artist_name": "Casual",
+    "song_id": "SOMZWCG12A8C13C480",
+    "title": "I Didn't Mean To",
+    "duration": 218.93179,
+    "year": 0
+}
+```
 ## The Goal
 ETL pipeline extract the data, applies the schema (star schema) and loads it in the Postgres DB.
 ## Database Schema
@@ -56,10 +125,7 @@ ENV POSTGRES_PASSWORD student
 ENV POSTGRES_DB studentdb
 ```
 
-Then run this command in order to build from the newly created **Dockerfile** (make sure not to forget the **.** at the end of this command)
-```
-docker build -t postgres-localdb-image .
-```
+
 
 ## Alternative step : retrieve image from docker hub
 
@@ -101,45 +167,11 @@ Data is currently collected for song and user activities, in two directories:
 
 ### Song dataset format
 
-```json
-{
-  "num_songs": 1,
-  "artist_id": "ARGSJW91187B9B1D6B",
-  "artist_latitude": 35.21962,
-  "artist_longitude": -80.01955,
-  "artist_location": "North Carolina",
-  "artist_name": "JennyAnyKind",
-  "song_id": "SOQHXMF12AB0182363",
-  "title": "Young Boy Blues",
-  "duration": 218.77506,
-  "year": 0
-}
-```
+
 
 ### Log dataset format
 
-```json
-{
-  "artist": "Survivor",
-  "auth": "Logged In",
-  "firstName": "Jayden",
-  "gender": "M",
-  "itemInSession": 0,
-  "lastName": "Fox",
-  "length": 245.36771,
-  "level": "free",
-  "location": "New Orleans-Metairie, LA",
-  "method": "PUT",
-  "page": "NextSong",
-  "registration": 1541033612796,
-  "sessionId": 100,
-  "song": "Eye Of The Tiger",
-  "status": 200,
-  "ts": 1541110994796,
-  "userAgent": "\"Mozilla/5.0 (Windows NT 6.3; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/36.0.1985.143 Safari/537.36\"",
-  "userId": "101"
-}
-```
+
 
 ## Schema
 
