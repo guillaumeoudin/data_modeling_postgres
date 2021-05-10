@@ -55,9 +55,9 @@ The raw data consists of files located in 2 directories:
 ## DB Schema
 The schema we will use is a star schema with **1 fact table** :
 
-|`songplays`||
+|songplays||
 |-|-|
-|**songplay_id**|**VARCHAR PRIMARY KEY**| 
+|songplay_id|VARCHAR PRIMARY KEY| 
 |start_time|BIGINT|
 |user_id|INT|
 |level|VARCHAR|
@@ -71,9 +71,9 @@ The schema we will use is a star schema with **1 fact table** :
 
 And **4 dimensions tables**:
 
-|`users`||
+|users||
 |-|-|
-|**user_id**|**INT PRIMARY KEY**| 
+|user_id|INT PRIMARY KEY| 
 |first_name|VARCHAR|
 |last_name|INT|
 |gender|VARCHAR|
@@ -81,9 +81,9 @@ And **4 dimensions tables**:
 
 <br>
 
-|`songs`||
+|songs||
 |-|-|
-|**song_id**|**VARCHAR PRIMARY KEY**| 
+|song_id|VARCHAR PRIMARY KEY| 
 |title|VARCHAR|
 |artist_id|VARCHAR|
 |year|INT|
@@ -91,9 +91,9 @@ And **4 dimensions tables**:
 
 <br>
 
-|`artists`||
+|artists||
 |-|-|
-|**artist_id**|**VARCHAR PRIMARY KEY**| 
+|artist_id|VARCHAR PRIMARY KEY| 
 |artist_name|VARCHAR|
 |artist_location|VARCHAR|
 |artist_latitude|NUMERIC|
@@ -101,7 +101,7 @@ And **4 dimensions tables**:
 
 <br>
 
-|`time`||
+|time||
 |-|-|
 |start_time|BIGINT| 
 |hour|INT|
