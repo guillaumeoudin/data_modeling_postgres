@@ -67,7 +67,6 @@ The schema we will use is a star schema with **1 fact table** :
 |location|VARCHAR| 
 |user_agent|VARCHAR|
 
-<br>
 
 And **4 dimensions tables**:
 
@@ -79,7 +78,6 @@ And **4 dimensions tables**:
 |gender|VARCHAR|
 |level|VARCHAR|
 
-<br>
 
 |songs||
 |-|-|
@@ -89,7 +87,6 @@ And **4 dimensions tables**:
 |year|INT|
 |duration|NUMERIC|
 
-<br>
 
 |artists||
 |-|-|
@@ -99,7 +96,6 @@ And **4 dimensions tables**:
 |artist_latitude|NUMERIC|
 |artist_longitude|NUMERIC|
 
-<br>
 
 |time||
 |-|-|
@@ -111,11 +107,7 @@ And **4 dimensions tables**:
 |year|INT|
 |weekday|INT|
 
-<br>
-
 This schema design will be used for easy analytics query.
-
-<br>
 
 # Quick Start
 
@@ -146,7 +138,6 @@ data-modeling-postgres
 │       ├── etl.py
 │       └── sql_queries.py
 ```
-<br>
 
 ## Installation
 Clone the repository of the project
@@ -174,7 +165,6 @@ Check the docker container is effectively running :
 ```
 $ docker ps
 ```
-<br>
 
 ## Instructions
 Place yourself in the `src` folder
@@ -185,8 +175,7 @@ Then execute the 2 scripts to respectively create the tables and then process th
 ``` 
 $ python scripts/create_tables.py
 $ python scripts/etl.py
-```   
-<br>      
+```      
 
 ## Results
 We will run the test in the jupyter environement
@@ -195,7 +184,6 @@ $ jupyter notebook
 ```
 Then navigate to `src/notebooks` and launch `test.ipynb`
 
-<br>
 
 ## Exemple queries
 
@@ -212,7 +200,6 @@ GROUP BY gender;
 |M|41|
 |F|55|
 
-<br>
 
 *Where is located our userbase ?*
 ```sql
