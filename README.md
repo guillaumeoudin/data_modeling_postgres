@@ -208,7 +208,7 @@ GROUP BY gender;
 *Ouput:*
 
 |gender|count|
-|-|-|-|
+|-|-|
 |M|41|
 |F|55|
 
@@ -224,7 +224,7 @@ ORDER BY COUNT(location) DESC;
 *Ouput:*
 
 |location|count|
-|-|-|-|
+|-|-|
 |Atlanta-Sandy Springs-Roswell, GA|105|
 |Waterloo-Cedar Falls, IA|86|
 |Lansing-East Lansing, MI|75|
