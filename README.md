@@ -200,6 +200,7 @@ GROUP BY gender;
 |M|41|
 |F|55|
 
+<br>
 
 *Where is located our userbase ?*
 ```sql
