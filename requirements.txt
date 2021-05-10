@@ -1,4 +1,3 @@
-psycopg2-binary
 pandas
 jupyter
-ipython-sql
+psycopg2
