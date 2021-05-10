@@ -1,0 +1,14 @@
+# docker-compose.yml
+version: '3'
+services:
+  postgresql:
+    image: "postgres" # use latest official postgres version
+    container_name: "postgres-localdb-container" # naming container for easier identification and shutdown
+    env_file:
+      - database.env # configure postgres
+    ports:
+      - "5432:5432" # Mapping ports
+    volumes:
+      - postgres-data:/var/lib/postgresql/data/ # Setting up a volume so that data persists even if container shuts down
+volumes:
+  postgres-data: # named volumes can be managed easier using docker-compose
