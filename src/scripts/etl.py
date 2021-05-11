@@ -88,8 +88,7 @@ def process_log_file(cur, filepath):
             songid, artistid = None, None
 
         # insert songplay record
-        songplay_data = (index,
-                         row.ts,
+        songplay_data = (row.ts,
                          row.userId,
                          row.level,
                          songid,
@@ -101,7 +100,7 @@ def process_log_file(cur, filepath):
         cur.execute(songplay_table_insert, songplay_data)
 
 
-def process_data(cur, conn, filepath, func):
+def process_data(cursor, connection, filepath, function):
     # get all files matching extension from directory
     all_files = []
     for root, dirs, files in os.walk(filepath):
@@ -111,12 +110,12 @@ def process_data(cur, conn, filepath, func):
 
     # get total number of files found
     num_files = len(all_files)
-    print(f'{num_files} files found in {all_files}')
+    print(f'\n{num_files} files found in {all_files}\n')
 
     # iterate over files and process
     for i, datafile in enumerate(all_files, 1):
-        func(cur, datafile)
-        conn.commit()
+        function(cursor, datafile)
+        connection.commit()
         print(f'{i}/{num_files} files processed.')
 
 
@@ -124,8 +123,8 @@ def main():
     conn = psycopg2.connect("host=127.0.0.1 dbname=sparkifydb user=student password=student")
     cur = conn.cursor()
 
-    process_data(cur, conn, filepath='../data/song_data', func=process_song_file)
-    process_data(cur, conn, filepath='../data/log_data', func=process_log_file)
+    process_data(cur, conn, filepath='../data/song_data', function=process_song_file)
+    process_data(cur, conn, filepath='../data/log_data', function=process_log_file)
 
     conn.close()
 
