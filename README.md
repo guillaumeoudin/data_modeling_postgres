@@ -74,7 +74,7 @@ And **4 dimensions tables**:
 |-|-|
 |user_id|INT PRIMARY KEY| 
 |first_name|VARCHAR|
-|last_name|INT|
+|last_name|VARCHAR|
 |gender|VARCHAR|
 |level|VARCHAR|
 
