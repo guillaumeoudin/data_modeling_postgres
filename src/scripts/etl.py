@@ -33,6 +33,20 @@ def process_song_file(cur, filepath):
 
 
 def process_log_file(cur, filepath):
+
+    """
+    This function processes a log file whose filepath has been provided as an arugment.
+    It extracts the log information in order to store it into the time table.
+    Then it extracts the user information in order to store it into the users table.
+    Finally it queries the songs and artists tables to retrieve respective IDs and inserts
+    the data from time and users tables into the songplay table.
+
+    INPUTS: 
+    * cur the cursor variable
+    * filepath the file path to the log file
+    """
+
+    
     # open log file
     df = pd.read_json(filepath, lines=True)
 
@@ -100,7 +114,24 @@ def process_log_file(cur, filepath):
         cur.execute(songplay_table_insert, songplay_data)
 
 
-def process_data(cursor, connection, filepath, function):
+def process_data(cur, conn, filepath, func):
+
+    """
+    This function first look for json files in the given path, stores the paths into a list
+    and prints the total number of files.
+    Then it iterates over the paths in the list and applies the function passed as argument
+    to each of the files.
+    Finally it commits the transaction to the database.
+    
+    INPUTS: 
+    * cur the cursor variable
+    * conn the connection variable
+    * filepath the file path to the log file  
+    * func the function we want to process the files with
+
+    """
+
+
     # get all files matching extension from directory
     all_files = []
     for root, dirs, files in os.walk(filepath):
@@ -114,17 +145,23 @@ def process_data(cursor, connection, filepath, function):
 
     # iterate over files and process
     for i, datafile in enumerate(all_files, 1):
-        function(cursor, datafile)
-        connection.commit()
+        func(cur, datafile)
+        conn.commit()
         print(f'{i}/{num_files} files processed.')
 
 
 def main():
+
+    """
+    This function is connecting to the local database and setting up a cursor for us to use.
+    It then calls the process_data function to launch the ETL pipeline.
+    """
+
     conn = psycopg2.connect("host=127.0.0.1 dbname=sparkifydb user=student password=student")
     cur = conn.cursor()
 
-    process_data(cur, conn, filepath='../data/song_data', function=process_song_file)
-    process_data(cur, conn, filepath='../data/log_data', function=process_log_file)
+    process_data(cur, conn, filepath='../data/song_data', func=process_song_file)
+    process_data(cur, conn, filepath='../data/log_data', func=process_log_file)
 
     conn.close()
 
