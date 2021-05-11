@@ -212,7 +212,8 @@ GROUP BY gender;
 SELECT location, COUNT(location)
 FROM songplays
 GROUP BY location
-ORDER BY COUNT(location) DESC;
+ORDER BY COUNT(location)
+DESC;
 ```
 *Ouput:*
 
