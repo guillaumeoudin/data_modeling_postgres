@@ -7,7 +7,7 @@ Its main goals are :
 
 ## Sparkify Database Project
 
-This project creates a postgres database `sparkifydb` for a fictional music app, *Sparkify*. The purpose of the project is to create an ETL pipeline which loads song and user data from json files to the database, enabling us to run analytics queries on the data.
+This project creates a database for **Sparkify**, a fictional company offering music through its app. The purpose of the project is to create an ETL pipeline which extracts, transforms and loads semi-structured data from json files to structured data into a postgres database, enabling us to run analytics queries on the data.
 
 ## Data before modeling
 The raw data consists of files located in 2 directories:
@@ -57,12 +57,12 @@ The schema we will use is a star schema with **1 fact table** :
 
 |songplays||
 |-|-|
-|songplay_id|VARCHAR PRIMARY KEY| 
-|start_time|BIGINT|
-|user_id|INT|
+|songplay_id|SERIAL PRIMARY KEY| 
+|start_time|BIGINT NOT NULL REFERENCES time (start_time)| 
+|user_id|INT NOT NULL REFERENCES users (user_id)|
 |level|VARCHAR|
-|song_id|VARCHAR|
-|artist_id|VARCHAR|
+|song_id|VARCHAR REFERENCES songs (song_id)|
+|artist_id|VARCHAR REFERENCES artists (artist_id)|
 |session_id|VARCHAR|
 |location|VARCHAR| 
 |user_agent|VARCHAR|
@@ -99,7 +99,7 @@ And **4 dimensions tables**:
 
 |time||
 |-|-|
-|start_time|BIGINT| 
+|start_time|BIGINT PRIMARY KEY| 
 |hour|INT|
 |day|INT|
 |week|INT|
@@ -114,8 +114,7 @@ This schema design will be used for easy analytics query.
 ## Requirements
 You need to have installed on your machine :
 - python (3.8 or above)
-- docker
-- docker-compose
+- docker and docker-compose
 
 ## Project structure
 ```
@@ -139,19 +138,22 @@ data-modeling-postgres
 │       └── sql_queries.py
 ```
 
-## Installation
-Clone the repository of the project
+## Installation 
+Run this command to clone the repository of the project
 ```bash
 $ git clone https://github.com/guillaumeoudin/data_modeling_postgres
 ```
-Place yourself into the local repository
+Then place yourself into the local repository
 ```bash
 $ cd data_modeling_postgres
 ```
-Setup the project virtual envionement and install needed dependencies
+Setup a virtual envionement for the project and initialize it
 ```bash
 $ python3 -m venv data-modeling-postgres
 $ source data-modeling-postgres/bin/activate
+```
+Install needed dependencies
+```
 $ pip install -r requirements.txt
 ```
 
@@ -182,7 +184,7 @@ We will run the test in the jupyter environement
 ```bash
 $ jupyter notebook
 ```
-Then navigate to `src/notebooks` and launch `test.ipynb`
+Then navigate in Jupyter interface to `src/notebooks` and launch `test.ipynb` to run the different cells.
 
 
 ## Exemple queries
