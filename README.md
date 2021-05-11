@@ -107,14 +107,10 @@ And **4 dimensions tables**:
 |year|INT|
 |weekday|INT|
 
-
----
-
 **Note :** 
 We make use of the postgres foreign key constraints to maintain referential integrity between tables. This schema design will be used for easy analytics query.
 
 ---
-
 
 # Quick Start
 
