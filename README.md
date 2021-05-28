@@ -241,8 +241,8 @@ DESC;
 
 |first_name|last_name|user_id|count|
 |-|-|-|-|
-|Jacqueline|Lynch|29|103|
 |Aleena|Kirby|44|186|
+|Jacqueline|Lynch|29|103|
 |Kate|Harrell|97|75|
 |...|...|...|...|
 
