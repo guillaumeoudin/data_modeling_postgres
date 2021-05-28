@@ -152,8 +152,8 @@ $ cd data_modeling_postgres
 ```
 Setup a virtual envionement for the project and initialize it
 ```bash
-$ python3 -m venv data-modeling-postgres
-$ source data-modeling-postgres/bin/activate
+$ python3 -m venv venv
+$ source venv/bin/activate
 ```
 Install needed dependencies
 ```
@@ -170,6 +170,7 @@ Check the docker container is effectively running :
 ```
 $ docker ps
 ```
+
 
 ## Instructions
 Place yourself in the `src` folder
